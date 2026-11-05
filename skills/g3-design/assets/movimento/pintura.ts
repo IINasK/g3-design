@@ -48,7 +48,7 @@ export function criarPintura(raiz: HTMLElement) {
      branco; se estava apagada, a cor nasce no ponto do clique. */
   function acender(el: HTMLElement, e?: MouseEvent, larguraFinal?: number) {
     if (el.classList.contains('apagando')) {
-      el.classList.remove('apagando')
+      el.classList.replace('apagando', 'reacendendo')
       return
     }
     marcarPonto(el, e, larguraFinal)
@@ -63,6 +63,7 @@ export function criarPintura(raiz: HTMLElement) {
   const temRaio = window.CSS && 'registerProperty' in CSS
   function apagar(el: HTMLElement, ponto: { x: number; y: number }) {
     if (!temRaio) return
+    el.classList.remove('reacendendo')
     const { x, y, w, h, xCss } = noCanto(el, ponto)
     const perto = Math.hypot(Math.max(0, -x, x - w), Math.max(0, -y, y - h))
     const longe = ateOCanto(x, y, w, h)
@@ -86,7 +87,8 @@ export function criarPintura(raiz: HTMLElement) {
 
   function zerarPintura(el: HTMLElement) {
     el.classList.add('pinta-instante')
-    el.classList.remove('apagando')
+    el.classList.remove('apagando', 'reacendendo')
+    for (const nome of ['--apaga-x', '--apaga-y', '--apaga-alvo']) el.style.removeProperty(nome)
     firmar(el)
     el.classList.remove('pinta-instante')
   }
@@ -96,7 +98,7 @@ export function criarPintura(raiz: HTMLElement) {
     if (e.propertyName !== '--apaga-raio') return
     const alvo = e.target as HTMLElement
     const el = alvo.classList.contains('pinta-camada') ? alvo.parentElement! : alvo
-    if (el.classList.contains('apagando')) zerarPintura(el)
+    if (el.classList.contains('apagando') || el.classList.contains('reacendendo')) zerarPintura(el)
   }
   raiz.addEventListener('transitionend', finalizar)
   return { pontoDo, noCanto, ateOCanto, marcarPonto, acender, apagar, firmar, zerarPintura,

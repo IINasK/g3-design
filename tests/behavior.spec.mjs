@@ -1,4 +1,5 @@
 import {test, expect} from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
 
 async function ready(page) {
   await page.goto('/?lang=pt');
@@ -91,6 +92,46 @@ test('hover light grows from the pointer and leaves no painted residue', async (
   await page.mouse.move(0, 0);
   await expect(button).not.toHaveClass(/iluminado/);
   await expect(button).not.toHaveClass(/apagando/);
+});
+
+for (const palette of ['claro', 'lavanda', 'noite', 'escuro']) test(`paint leaves the original border intact and no resting mask after reentry: ${palette}`, async ({page}, info) => {
+  test.skip(info.project.name !== 'desktop', 'Fine-pointer hover regression.');
+  await ready(page);
+  await page.locator('[data-lang=en]').click();
+  await page.locator('#theme-toggle').click();
+  await page.locator(`[data-palette-choice="${palette}"]`).click();
+  const button = page.locator('#explore');
+  await button.evaluate(node => { node.dataset.hoverEntries = '0'; node.addEventListener('pointerenter', () => { node.dataset.hoverEntries = String(Number(node.dataset.hoverEntries) + 1); }); });
+  const rect = await button.boundingBox();
+  await page.mouse.move(rect.x + rect.width - 45, rect.y + rect.height - 2);
+  await page.waitForTimeout(900);
+  const actual = await button.screenshot();
+  await writeFile(info.outputPath('painted-border.png'), actual);
+  // Reference the button's existing border geometry, without painting over it.
+  const previous = await page.evaluate(() => {
+    const rule = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).find(rule => rule.selectorText === '.pinta::before');
+    const old = rule.style.cssText;
+    rule.style.border = 'inherit'; rule.style.borderColor = 'transparent'; rule.style.boxSizing = 'border-box'; rule.style.backgroundClip = 'padding-box';
+    return old;
+  });
+  const expected = await button.screenshot();
+  await writeFile(info.outputPath('original-border.png'), expected);
+  await page.evaluate(old => {
+    const rule = [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).find(rule => rule.selectorText === '.pinta::before');
+    rule.style.cssText = old;
+  }, previous);
+  await info.attach('painted-border.png', {body: actual, contentType: 'image/png'});
+  await info.attach('original-border.png', {body: expected, contentType: 'image/png'});
+  expect(Number(await button.getAttribute('data-hover-entries')), 'A stationary pointer at the edge must not repeatedly re-enter').toBe(1);
+  expect(actual.equals(expected), 'Hover must preserve the original border pixels').toBe(true);
+  await page.mouse.move(rect.x + rect.width - 45, rect.y + rect.height + 8);
+  await page.waitForTimeout(120);
+  await page.mouse.move(rect.x + 70, rect.y + 12);
+  await page.waitForTimeout(900);
+  expect(await button.evaluate(node => getComputedStyle(node, '::before').maskImage)).toBe('none');
+  await page.mouse.move(0, 0);
+  await expect(button).not.toHaveClass(/apagando|reacendendo/);
+  expect(await button.evaluate(node => getComputedStyle(node, '::before').maskImage)).toBe('none');
 });
 
 test('pointer movement reaches the shared wave physics', async ({page}, info) => {

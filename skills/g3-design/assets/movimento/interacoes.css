@@ -2,14 +2,16 @@
 .pinta { position: relative; isolation: isolate; }
 .pinta::before {
   content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
-  pointer-events: none; background: var(--pinta-cor);
+  pointer-events: none; background: var(--pinta-cor); box-sizing: border-box;
+  border: inherit; border-color: transparent; background-clip: padding-box;
   --pinta-raio: 0px; --apaga-raio: 0px;
   clip-path: circle(var(--pinta-raio) at var(--pinta-x, 50%) var(--pinta-y, 50%));
-  mask: radial-gradient(circle at var(--apaga-x, 50%) var(--apaga-y, 50%), transparent calc(var(--apaga-raio) - 1px), #000 var(--apaga-raio));
+  mask: none;
   transition: clip-path var(--tempo-pintura, 820ms) var(--curva-pintura, cubic-bezier(.22,1,.36,1)), --apaga-raio var(--tempo-apagar, 820ms) var(--curva-pintura, cubic-bezier(.22,1,.36,1));
 }
 .pinta.iluminado::before, .pinta.apagando::before { --pinta-raio: var(--pinta-alvo, 0px); }
 .pinta.apagando::before { --apaga-raio: var(--apaga-alvo, 0px); }
+.pinta.apagando::before, .pinta.reacendendo::before { mask: radial-gradient(circle at var(--apaga-x, 50%) var(--apaga-y, 50%), transparent calc(var(--apaga-raio) - 1px), #000 var(--apaga-raio)); }
 .pinta.pinta-instante::before { transition: none; }
 .seletor-deslizante { display: inline-block; }
 .seletor-conteudo { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); isolation: isolate; min-width: 0; }

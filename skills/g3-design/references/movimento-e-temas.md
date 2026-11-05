@@ -56,6 +56,12 @@ dentro da borda arredondada. Foco por teclado nasce no centro; toque recebe
 feedback da pressão. Meça o raio, preserve o ponto e anime clip-path; não faça
 o centro deslizar até o clique. Na saída, o furo revela a superfície original.
 Reentrada durante a saída reverte o estado sem flash ou resíduo.
+O fundo da pintura respeita a área interna da borda existente. A máscara existe
+somente durante a saída ou sua reversão; assentada, deve ser removida, inclusive
+suas coordenadas. Audite também os pixels junto à borda após reentrada rápida.
+Hover não desloca a área clicável para fora do ponteiro: anime o conteúdo visual
+ou a elevação. Deslocar o próprio controle pode alternar entrada e saída sem que
+o mouse se mova, reativando a pintura nas extremidades.
 
 A cápsula do seletor é uma peça única. Forma e recorte dos rótulos compartilham
 o relógio. Uma reversão amostra a posição e escala atuais antes de cancelar a

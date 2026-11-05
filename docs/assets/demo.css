@@ -108,10 +108,11 @@ dialog::backdrop { background: transparent; }
 #motion-note { margin-top: 6px; }
 .noscript { margin: 20px; }
 @media (hover: hover) and (pointer: fine) {
-  .button:hover, .icon-button:hover, .expand-chip:hover { transform: translateY(-2px); box-shadow: 3px 8px 15px -8px color-mix(in srgb,var(--primary) 40%,transparent); }
+  .button:hover, .icon-button:hover, .expand-chip:hover { box-shadow: 3px 8px 15px -8px color-mix(in srgb,var(--primary) 40%,transparent); }
+  .button:hover > span, .button:hover > svg, .icon-button:hover > svg, .expand-chip:hover > span, .expand-chip:hover > svg { transform: translateY(-2px); }
   .text-link:hover svg { transform: translateX(4px); }
   .agents button:hover { background: color-mix(in srgb,var(--accent) 20%,var(--surface)); color: var(--text); }
-  .experience-nav button:hover { transform: translateX(4px); }
+  .experience-nav button:hover > span, .experience-nav button:hover > svg { transform: translateX(4px); }
 }
 .button:active, .icon-button:active, .expand-chip:active, .agents button:active { transform: translateY(1px) scale(.98); }
 [data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after { scroll-behavior: auto !important; transition-duration: 0s !important; }
@@ -191,3 +192,6 @@ dialog::backdrop { background: transparent; }
 .pinta { --pinta-cor: var(--paint-surface); }
 .primary.pinta, .expand-chip.pinta, .agents [aria-pressed=true].pinta, .experience-nav [aria-pressed=true].pinta { --pinta-cor: var(--paint-action); }
 @media (hover: hover) and (pointer: fine) { .agents button:hover { background: var(--surface); } .agents [aria-pressed=true]:hover { background: var(--primary); color: var(--on-primary); } }
+
+/* Move the visual content; the hover hit area stays stationary. */
+.pinta > span, .pinta > svg { transition: transform .24s var(--curve); }
