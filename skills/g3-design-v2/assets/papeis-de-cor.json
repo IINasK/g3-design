@@ -1,0 +1,30 @@
+{
+  "versao": 1,
+  "origem": "Papéis aprovados G3 V2 Corporativo, claro e escuro",
+  "revisao": "bad776f2e3dc9d8b8602de5020dcad20dcf953fc",
+  "uso": "Base opcional para projeto sem paleta própria. Centralizar no tema do destino.",
+  "temas": {
+    "claro": {
+      "fundo": "#F8F9FA",
+      "superficie": "#FFFFFF",
+      "texto": "#1A1A1A",
+      "textoSecundario": "#3A4B5C",
+      "acento": "#CDAA80",
+      "borda": "#0F1E36",
+      "foco": "#0F1E36",
+      "acao": "#0F1E36",
+      "textoSobreAcao": "#FFFFFF"
+    },
+    "escuro": {
+      "fundo": "#151c28",
+      "superficie": "#18283e",
+      "texto": "#FFFFFF",
+      "textoSecundario": "#c4c9ce",
+      "acento": "#CDAA80",
+      "borda": "#CDAA80",
+      "foco": "#CDAA80",
+      "acao": "#0F1E36",
+      "textoSobreAcao": "#FFFFFF"
+    }
+  }
+}

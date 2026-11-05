@@ -1,0 +1,4 @@
+interface:
+  display_name: "G3 V2"
+  short_description: "Design portátil, componentes e auditoria visual"
+  default_prompt: "Use $g3-design-v2 para aplicar o padrão visual reutilizando a biblioteca deste projeto."
