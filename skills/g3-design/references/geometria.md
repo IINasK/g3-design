@@ -26,6 +26,18 @@ indica a área de upload quando previsto, não a borda comum de caixas e inputs.
 - Separe recorte do conteúdo rolável e superfície arredondada quando foco ou
   popup precisar ultrapassá-lo. Portais seguem a biblioteca do destino.
 
+## Ações com texto e ícone
+
+- Ações vizinhas da mesma família reutilizam o componente e seus tokens de altura,
+  raio, padding e tipografia. Uma ação secundária pode ter outra ênfase, sem virar
+  um link sem recuos. Preserve a semântica: link navega; botão executa uma ação.
+- Reserve espaço real nos dois lados. O recuo do ícone inclui seu deslocamento
+  máximo no hover. Texto e ícone permanecem alinhados também durante o movimento.
+- O espaço entre ações pertence ao layout, separado do padding interno. Quando
+  rótulos traduzidos não couberem, ajuste o fluxo antes de reduzir a fonte.
+- Compare a peça com um consumidor correto da mesma variante. Não imponha altura
+  ou formato de botão a links de texto que não pertencem a esse grupo de ações.
+
 ## Conteúdo, ícones e largura
 
 - Reserve colunas reais para texto, ícone e ação. Na web, minmax(0, 1fr) e

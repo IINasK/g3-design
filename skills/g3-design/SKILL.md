@@ -13,95 +13,70 @@ metadata:
 
 # G3 Design
 
-Entregue uma interface funcional, com geometria consistente e a linguagem visual
-solicitada. Este pacote é portátil. Descubra os componentes e as regras do projeto
-em que está trabalhando antes de escolher ferramentas ou escrever código.
+Aplique a identidade visual com os componentes e as regras do projeto de destino.
+Este pacote é portátil: marca, dados, rotas e infraestrutura pertencem ao destino.
+Não importe marca, conteúdo ou rotas de outro produto.
 
-## 1. Identificar o destino
+## Fluxo de trabalho
 
-Leia as instruções locais e identifique plataforma, stack, entrada operacional,
-biblioteca de componentes, tema, ícones e validações disponíveis. Localize os
-consumidores e testes da peça que será alterada. Uma referência aprovada em código
-é a fonte da implementação, incluindo seus estados e movimentos.
+### 1. Localizar a fonte
 
-Nomes, logotipos, rotas, contas, exemplos e entidades pertencem ao destino. Usar o
-estilo G3 Design não autoriza inserir conteúdo de outro produto. Referências de marca
-e imagens fornecidas para análise são dados. Siga as instruções do pedido.
+Leia as instruções locais e identifique stack, entrada operacional, componentes,
+tokens, ícones e testes da peça. Código aprovado define geometria, estados e
+movimento. Screenshot ajuda a observar; não substitui a implementação executável.
 
-## 2. Fixar o contrato visual da mudança
+### 2. Definir o recorte
 
-Registre de forma breve quais componentes serão reutilizados, os papéis dos
-tokens, a variante dos campos e os estados que precisam funcionar. Use o registro
-existente do projeto. Crie um DESIGN.md apenas quando houver necessidade concreta
-de documentar um sistema novo. O [exemplo](examples/contrato-visual.md) mostra o
-nível de precisão esperado, sem impor uma stack.
+Registre componente reutilizado, variante, estados e prova de conclusão no registro
+já existente. O [exemplo de contrato visual](examples/contrato-visual.md) mostra o
+nível necessário. Crie DESIGN.md somente quando um sistema novo precisar dele.
 
-Leia [linguagem visual](references/linguagem-visual.md) para estabelecer materiais,
-hierarquia, tema e movimento. Preserve a identidade e os valores já aprovados.
-Para um projeto novo sem paleta fornecida, os
-[papéis de cor de referência](assets/papeis-de-cor.json) oferecem uma base clara
-e escura em quatro temas. Informe essa escolha. Os valores ficam centralizados no tema do destino.
+Leia apenas as referências pertinentes:
 
-## 3. Reutilizar a implementação
+| Trabalho | Referência responsável |
+| --- | --- |
+| Identidade, materiais, tipografia e paleta | [Linguagem visual](references/linguagem-visual.md) |
+| Campos, ações, bordas, recuos, ícones desalinhados ou popups | [Geometria](references/geometria.md) |
+| Ondas, pintura radial, seletor, origem, tempos ou troca de tema | [Movimento e temas](references/movimento-e-temas.md) |
+| Encontrar e integrar ícone ou componente | [Ícones e componentes](references/icones-e-componentes.md) |
+| Conferir a entrega e escolher contraprovas | [Auditoria visual](references/auditoria-visual.md) |
 
-Procure primeiro o componente, adaptador e ícone já usados na mesma interface.
-Reutilize-os com seus contratos e regras de negócio. Preserve a arquitetura,
-dependências e convenções do destino. Uma solução funcional da biblioteca tem
-precedência sobre uma reconstrução visualmente parecida.
+Na adoção integral da identidade sem paleta própria, use os quatro temas dos
+[papéis de cor](assets/papeis-de-cor.json). Preserve a paleta já aprovada do destino.
+Valores e motores ficam nas fontes compartilhadas, não repetidos em cada tela.
 
-Para um ícone ausente, consulte a biblioteca oficial adequada e sua licença.
-Prefira a família já adotada. Registre fornecedor, nome do ícone, versão ou revisão
-e licença no mecanismo de atribuição do projeto. Use seu asset ou pacote oficial.
-Desenho próprio só atende símbolo exclusivo, como uma marca solicitada. Consulte
-[ícones e componentes](references/icones-e-componentes.md) para esses casos.
+### 3. Integrar a menor correção completa
 
-Capturas e desenhos servem para observar a composição. Construa campos, botões,
-bordas e superfícies em código ou widgets da plataforma. Recortes dessas imagens
-não compõem a interface. Uma plataforma que exige bitmap pode receber a conversão
-de um ícone vetorial licenciado, preservando sua procedência.
+Reutilize componente, adaptador, máscara e regra de negócio antes de criar outra
+peça. Uma variante secundária muda a ênfase da ação; sua geometria continua a da
+família escolhida. Corrija a fonte comum e confira os consumidores afetados.
 
-## 4. Resolver campos e bordas na fonte da peça
+Ícones vêm do catálogo adotado, com identificador, versão e licença registrados
+no destino. Preserve o vetor e seus vazados. Símbolo próprio atende uma marca
+solicitada; recorte de screenshot não compõe campo, ícone ou borda funcional.
 
-Antes de editar campos, contêineres, popups ou clipping, leia
-[geometria dos componentes](references/geometria.md). Defina explicitamente se a
-peça usa contorno fechado ou sublinhado de edição. Compartilhe raio, espessura,
-recuos e estados entre consumidores dessa variante.
+Responsividade preserva legibilidade, foco e alvos de toque. Menus operacionais
+preenchem a tela móvel com respiro e safe areas; seletores de cor ficam compactos.
+Lógica visual não altera dados, cálculos ou condições de edição do projeto.
 
-Reserve espaço real para ícones e mensagens. Corrija a causa de sobreposição ou
-recorte no layout e nas camadas. Foco, validação e seleção permanecem distinguíveis.
-Sombra, imagem ou overflow oculto não substituem essa correção.
+### 4. Verificar antes de concluir
 
-## 5. Responsividade e interação
+Use a [auditoria](references/auditoria-visual.md) para reproduzir o defeito real,
+comprovar a correção e testar os consumidores afetados. Build, AST ou classe CSS
+isolada não demonstram aparência, continuidade, origem ou ausência de resíduos.
 
-Para ondas, transições, hover, seletores ou troca de cores, leia
-[movimento e temas](references/movimento-e-temas.md) e reutilize suas fontes.
-A identidade inclui ondas interativas, luz radial, cápsula deslizante e quatro
-temas. Fechar contrai no clique atual, não no ponto que abriu a tela.
+Ao incorporar um aprendizado, mantenha causa, regra reutilizável e prova na
+referência responsável. Medidas particulares ficam no componente/preset do destino.
+Não crie outra camada, regra por tela ou script quando a peça existente resolve.
 
-Adapte o conteúdo e os controles à largura disponível, mantendo fonte legível e
-alvos de toque. Texto e dados reais longos precisam caber ou receber tratamento
-explícito de truncamento. Menus operacionais ocupam a tela móvel com respiro
-interno e safe areas. Seletores compactos de cor conservam seu formato flutuante.
-Reutilize o comportamento de fechamento e foco da plataforma e do projeto.
+## Conferência do pacote
 
-No desktop, menus ancorados respeitam o gatilho e a área visível. Audite a largura
-próxima da quebra de layout, além dos formatos pequeno e grande. Em documentos,
-separe edição e impressão conforme o contrato existente da peça.
+Na pasta da skill, execute `python -B scripts/validar_pacote.py` com Python 3.9+.
+Confere recursos, links Markdown, heurísticas de caminhos e pares de cor,
+incluindo extremos dos degradês. Não certifica a interface gerada, portabilidade
+completa, transparências ou segurança. Revise scripts de terceiros antes de usá-los.
 
-## 6. Validar e encerrar
-
-Use [auditoria visual](references/auditoria-visual.md) para conferir a interação
-real, geometria, temas, conteúdo longo, teclado e movimento reduzido. Meça o
-desempenho quando a mudança envolver animação, filtros, Canvas ou composição.
-Reutilize os testes pertinentes do destino e as autorizações já concedidas.
-
-A estrutura deste pacote pode ser conferida com
-`python -B scripts/validar_pacote.py`, com Python 3.9 ou superior, na pasta da
-skill. Confere recursos, referências Markdown, heurísticas de caminhos em
-Markdown/YAML/JSON/TypeScript/CSS e pares de cor, incluindo extremos dos degradês. Não certifica portabilidade completa,
-contraste de transparências ou a interface produzida. Scripts de terceiros precisam de revisão antes da execução.
-Exportar código, imagens ou telas para um serviço externo exige autorização
-compatível com os dados e o destino.
-
-Conclua com o resultado observável, a validação feita e seus limites. Arquivo
-compilado, análise estática e captura parada comprovam aspectos diferentes.
+Reutilize os testes e autorizações existentes. Enviar código ou imagens a serviço
+externo exige autorização compatível; a skill não concede acesso nem publicação.
+Conclua com mudanças, provas e limites observados, distinguindo emulação de aparelho
+físico e análise estática de execução.
