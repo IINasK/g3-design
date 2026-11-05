@@ -13,7 +13,7 @@ Instructions and examples may evolve.
 
 **[→ Try the interactive demo](https://iinask.github.io/g3-design/?lang=en)**
 
-Try the editable field, button feedback, light/dark themes and the expanding screen transition. Switch between Portuguese and English in the demo.
+Try pointer- and touch-responsive waves, radial button lighting and the travelling PT/EN capsule. Circular transitions contract at the current click. Choose **Corporate, Lavender, Night or Corporate Dark**.
 
 The GitHub README displays a clickable banner. The interactive experience runs on GitHub Pages.
 
@@ -69,7 +69,8 @@ Copy the entire [`skills/g3-design`](skills/g3-design/SKILL.md) folder to your a
 
 - Consistent fields, borders, spacing, focus and states.
 - Reuse of components and licensed official icons.
-- Semantic light/dark themes and contrast.
+- Four themes with semantic roles, contrast and coordinated wave colors.
+- Included TypeScript/CSS engines for interactive waves, radial light and sliding selectors.
 - Responsive layouts, accessible interaction and reduced motion.
 - Real-world visual and performance checks.
 
@@ -87,7 +88,7 @@ python -B skills/g3-design/scripts/validar_pacote.py
 python -B -m unittest discover -s tests -p test_validar_pacote.py -v
 ```
 
-The demo is static HTML/CSS with bundled TypeScript, without runtime framework dependencies. Python 3.9+ is needed for the skill checks and the local test server.
+The demo is static HTML/CSS with bundled TypeScript, without runtime framework dependencies. Python 3.9+ is needed for skill checks. Tests use a Node static server bound to the local address.
 
 A real symlink test can be skipped explicitly if the operating system refuses to create it. Browser emulation does not replace physical-device testing.
 

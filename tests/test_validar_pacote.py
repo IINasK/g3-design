@@ -57,6 +57,31 @@ class FiscalDoPacote(unittest.TestCase):
         caminho.write_text(json.dumps(dados), encoding="utf-8")
         self.assertTrue(any("CONTRASTE" in e for e in FISCAL.validar(self.copia)))
 
+    def test_catalogo_incompleto_recusa_pacote(self):
+        caminho = self.copia / "assets/papeis-de-cor.json"
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+        del dados["temas"]["lavanda"]
+        caminho.write_text(json.dumps(dados), encoding="utf-8")
+        self.assertIn("PALETA: quatro temas necessários", FISCAL.validar(self.copia))
+
+    def test_motor_ausente_recusa_pacote(self):
+        (self.copia / "assets/movimento/fisica-fundo.ts").unlink()
+        self.assertTrue(any("RECURSO_AUSENTE" in e for e in FISCAL.validar(self.copia)))
+
+    def test_gradiente_invisivel_recusa_pacote(self):
+        caminho = self.copia / "assets/papeis-de-cor.json"
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+        dados["temas"]["noite"]["pinturaAcao"] = "linear-gradient(#ffffff, #ffffff)"
+        caminho.write_text(json.dumps(dados), encoding="utf-8")
+        self.assertTrue(any("CONTRASTE: noite/textoSobreAcao/pinturaAcao" in e for e in FISCAL.validar(self.copia)))
+
+    def test_ondas_invalidas_recusam_pacote(self):
+        caminho = self.copia / "assets/papeis-de-cor.json"
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+        dados["temas"]["claro"]["ondas"] = [{"cores": "não é uma lista"}] * 3
+        caminho.write_text(json.dumps(dados), encoding="utf-8")
+        self.assertTrue(any("camadas de ondas inválidas" in e for e in FISCAL.validar(self.copia)))
+
     def test_paleta_com_estrutura_invalida_recusa_sem_excecao(self):
         (self.copia / "assets/papeis-de-cor.json").write_text('{"temas":{"claro":[]}}', encoding="utf-8")
         self.assertTrue(any("PALETA" in e for e in FISCAL.validar(self.copia)))

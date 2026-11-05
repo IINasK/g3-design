@@ -1,5 +1,5 @@
-/* Generated from the skill's shared color roles. */
-:root, [data-theme="light"] {
+/* Generated from the skill's shared roles and clocks. */
+:root, [data-palette="claro"] {
   --page: #F8F9FA;
   --surface: #FFFFFF;
   --text: #1A1A1A;
@@ -9,10 +9,42 @@
   --focus: #0F1E36;
   --primary: #0F1E36;
   --on-primary: #FFFFFF;
+  --paint-action: linear-gradient(135deg, #0F1E36 0%, #0F1E36 45%, #857057 100%);
+  --paint-surface: linear-gradient(140deg, #FFFFFF, #e3e6e8);
   color-scheme: light;
 }
 
-[data-theme="dark"] {
+[data-palette="lavanda"] {
+  --page: #ffffff;
+  --surface: #ffffff;
+  --text: #221d33;
+  --muted: #625b7c;
+  --accent: #ff9b73;
+  --border: #5b3fd8;
+  --focus: #5b3fd8;
+  --primary: #5b3fd8;
+  --on-primary: #ffffff;
+  --paint-action: linear-gradient(135deg, #5b3fd8, #7b5cf0);
+  --paint-surface: linear-gradient(140deg, #ffffff, #ededef);
+  color-scheme: light;
+}
+
+[data-palette="noite"] {
+  --page: #15121d;
+  --surface: #242032;
+  --text: #ece8f6;
+  --muted: #a79fc2;
+  --accent: #f89e7a;
+  --border: #f89e7a;
+  --focus: #f89e7a;
+  --primary: #6047d0;
+  --on-primary: #ffffff;
+  --paint-action: linear-gradient(135deg, #6047d0, #735dd6);
+  --paint-surface: linear-gradient(140deg, #242032, #484455);
+  color-scheme: dark;
+}
+
+[data-palette="escuro"] {
   --page: #151c28;
   --surface: #18283e;
   --text: #FFFFFF;
@@ -22,5 +54,13 @@
   --focus: #CDAA80;
   --primary: #0F1E36;
   --on-primary: #FFFFFF;
+  --paint-action: linear-gradient(135deg, #0F1E36 0%, #0F1E36 45%, #857057 100%);
+  --paint-surface: linear-gradient(140deg, #424f61, #596474);
   color-scheme: dark;
 }
+
+:root { --tempo-pintura: 820ms; --tempo-apagar: 820ms; --curva-pintura: cubic-bezier(0.22, 1, 0.36, 1); }
+[data-palette-choice="claro"] i { background: #0F1E36; box-shadow: inset 0 0 0 3px #CDAA80; }
+[data-palette-choice="lavanda"] i { background: #5b3fd8; box-shadow: inset 0 0 0 3px #ff9b73; }
+[data-palette-choice="noite"] i { background: #6047d0; box-shadow: inset 0 0 0 3px #f89e7a; }
+[data-palette-choice="escuro"] i { background: #0F1E36; box-shadow: inset 0 0 0 3px #CDAA80; }

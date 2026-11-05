@@ -13,7 +13,7 @@ As instruções e os exemplos podem evoluir.
 
 **[→ Experimentar a demonstração interativa](https://iinask.github.io/g3-design/?lang=pt)**
 
-Teste o campo editável, o feedback dos botões, os temas claro/escuro e o menu que se expande para outra tela. A demonstração alterna entre português e inglês.
+Teste as ondas que respondem ao ponteiro e ao toque, a luz radial dos botões e o seletor PT/EN com cápsula deslizante. A transição circular fecha no ponto do clique atual. Escolha entre **Corporativo, Lavanda, Noite e Corporativo Escuro**.
 
 O README do GitHub exibe um banner clicável. A experiência interativa funciona no GitHub Pages.
 
@@ -69,7 +69,8 @@ Copie a pasta inteira [`skills/g3-design`](skills/g3-design/SKILL.md) para o dir
 
 - Campos, bordas, espaçamentos, foco e estados consistentes.
 - Reutilização de componentes e ícones oficiais licenciados.
-- Temas claro/escuro por papéis semânticos e contraste.
+- Quatro temas por papéis semânticos, com contraste e cores das ondas.
+- Motores TypeScript/CSS de ondas interativas, luz radial e seletor deslizante incluídos no pacote.
 - Responsividade, interação acessível e movimento reduzido.
 - Conferência visual e de desempenho no ambiente real.
 
@@ -87,7 +88,7 @@ python -B skills/g3-design/scripts/validar_pacote.py
 python -B -m unittest discover -s tests -p test_validar_pacote.py -v
 ```
 
-O piloto usa HTML/CSS e TypeScript compilado, sem dependências de framework em execução. Python 3.9+ é usado nas verificações da skill e no servidor local dos testes.
+O piloto usa HTML/CSS e TypeScript compilado, sem dependências de framework em execução. Python 3.9+ é usado nas verificações da skill. Os testes usam um servidor estático Node restrito ao endereço local.
 
 Um teste real de link simbólico pode ser ignorado explicitamente quando o sistema operacional recusar sua criação. Emulação no navegador não substitui teste em aparelho físico.
 

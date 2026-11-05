@@ -40,7 +40,7 @@ Leia [linguagem visual](references/linguagem-visual.md) para estabelecer materia
 hierarquia, tema e movimento. Preserve a identidade e os valores já aprovados.
 Para um projeto novo sem paleta fornecida, os
 [papéis de cor de referência](assets/papeis-de-cor.json) oferecem uma base clara
-e escura. Informe essa escolha. Os valores ficam centralizados no tema do destino.
+e escura em quatro temas. Informe essa escolha. Os valores ficam centralizados no tema do destino.
 
 ## 3. Reutilizar a implementação
 
@@ -73,6 +73,11 @@ Sombra, imagem ou overflow oculto não substituem essa correção.
 
 ## 5. Responsividade e interação
 
+Para ondas, transições, hover, seletores ou troca de cores, leia
+[movimento e temas](references/movimento-e-temas.md) e reutilize suas fontes.
+A identidade inclui ondas interativas, luz radial, cápsula deslizante e quatro
+temas. Fechar contrai no clique atual, não no ponto que abriu a tela.
+
 Adapte o conteúdo e os controles à largura disponível, mantendo fonte legível e
 alvos de toque. Texto e dados reais longos precisam caber ou receber tratamento
 explícito de truncamento. Menus operacionais ocupam a tela móvel com respiro
@@ -93,7 +98,7 @@ Reutilize os testes pertinentes do destino e as autorizações já concedidas.
 A estrutura deste pacote pode ser conferida com
 `python -B scripts/validar_pacote.py`, com Python 3.9 ou superior, na pasta da
 skill. Confere recursos, referências Markdown, heurísticas de caminhos em
-Markdown/YAML/JSON e pares sólidos de cor. Não certifica portabilidade completa,
+Markdown/YAML/JSON/TypeScript/CSS e pares de cor, incluindo extremos dos degradês. Não certifica portabilidade completa,
 contraste de transparências ou a interface produzida. Scripts de terceiros precisam de revisão antes da execução.
 Exportar código, imagens ou telas para um serviço externo exige autorização
 compatível com os dados e o destino.

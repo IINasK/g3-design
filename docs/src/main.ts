@@ -1,4 +1,8 @@
 import {montarOndas} from './ondas';
+import {criarPintura} from '../../skills/g3-design/assets/movimento/pintura';
+import {montarSeletorDeslizante} from '../../skills/g3-design/assets/movimento/seletor';
+import {MOVIMENTO} from '../../skills/g3-design/assets/movimento/presets';
+import {temas} from '../../skills/g3-design/assets/papeis-de-cor.json';
 
 const pt = {
   status: '1.0.0 · EM DESENVOLVIMENTO', heading: 'Minimalismo.', headingAccent: 'Com presença.',
@@ -66,11 +70,12 @@ let phase: 'closed' | 'opening' | 'open' | 'closing' = 'closed';
 let view: View = 'overview';
 let name = '', agent: typeof agents[number] = 'claude-code', effects = true, sequence = 0;
 let trigger: HTMLElement | null = null;
-let origin = {x: 0, y: 0};
 let panelWaves: ReturnType<typeof montarOndas> | null = null;
 let currentAnimation: Animation | null = null;
 let copyTimer: ReturnType<typeof setTimeout> | undefined;
 const heroWaves = montarOndas(el<HTMLCanvasElement>('hero-waves'), () => phase === 'closed' && moving());
+const pintura = criarPintura(document.body);
+const seletor = montarSeletorDeslizante(document.querySelector<HTMLElement>('.languages')!, moving);
 function moving() { return effects && !reduced.matches; }
 function words() { return language === 'en' ? en : pt; }
 function text(key: Key) { return words()[key]; }
@@ -104,7 +109,7 @@ function setLanguage(next: 'pt' | 'en') {
   el('sample-title').textContent = name || text('sampleTitle');
   el('field-feedback').textContent = '';
   input.removeAttribute('aria-invalid');
-  setView(view, false); setAgent(agent);
+  setView(view, false); setAgent(agent); atualizarPaletas();
   const url = new URL(location.href); url.searchParams.set('lang', next); history.replaceState(null, '', url);
 }
 function setMotion() {
@@ -113,13 +118,15 @@ function setMotion() {
   if (!moving()) {
     document.getAnimations().filter(animation => animation !== currentAnimation).forEach(animation => animation.cancel());
     currentAnimation?.finish();
+    document.querySelectorAll<HTMLElement>('.pinta').forEach(node => { node.classList.remove('iluminado'); pintura.zerarPintura(node); });
   }
+  seletor.atualizarEfeitos();
   heroWaves.atualizar(); panelWaves?.atualizar();
 }
-async function transition(from: string, to: string) {
+async function transition(from: string, to: string, closing = false) {
   currentAnimation?.cancel();
   if (!moving()) return;
-  const animation = dialog.animate([{clipPath: from}, {clipPath: to}], {duration: 520, easing: 'cubic-bezier(.22,1,.36,1)'});
+  const animation = dialog.animate([{clipPath: from}, {clipPath: to}], {duration: closing ? MOVIMENTO.recolher : MOVIMENTO.pintura, easing: closing ? MOVIMENTO.curvaRecolher : MOVIMENTO.curvaPintura});
   currentAnimation = animation;
   await animation.finished.catch(() => {});
   if (currentAnimation === animation) currentAnimation = null;
@@ -128,8 +135,7 @@ async function openExperience(event: MouseEvent) {
   if (phase !== 'closed') return;
   const ownSequence = ++sequence;
   trigger = event.currentTarget as HTMLElement;
-  const rect = trigger.getBoundingClientRect();
-  origin = {x: rect.left + rect.width / 2, y: rect.top + rect.height / 2};
+  const origin = pintura.pontoDo(trigger, event);
   phase = 'opening'; heroWaves.atualizar();
   dialog.showModal();
   panelWaves = montarOndas(el<HTMLCanvasElement>('dialog-waves'), () => phase === 'open' && moving());
@@ -137,14 +143,16 @@ async function openExperience(event: MouseEvent) {
   await transition(`circle(0px at ${origin.x}px ${origin.y}px)`, `circle(${radius}px at ${origin.x}px ${origin.y}px)`);
   if (ownSequence === sequence && phase === 'opening') { phase = 'open'; panelWaves?.atualizar(); el('close-experience').focus({preventScroll: true}); }
 }
-async function closeExperience() {
+async function closeExperience(event?: MouseEvent) {
   if (phase === 'closed' || phase === 'closing') return;
+  const origin = pintura.pontoDo(event?.currentTarget as HTMLElement || el('close-experience'), event);
+  // Complete an interrupted reveal before contracting at a different point.
+  currentAnimation?.finish();
   const ownSequence = ++sequence;
   phase = 'closing';
   panelWaves?.atualizar();
-  const from = getComputedStyle(dialog).clipPath;
-  const radius = Math.hypot(innerWidth, innerHeight);
-  await transition(from === 'none' ? `circle(${radius}px at ${origin.x}px ${origin.y}px)` : from, `circle(0px at ${origin.x}px ${origin.y}px)`);
+  const radius = pintura.ateOCanto(origin.x, origin.y, innerWidth, innerHeight);
+  await transition(`circle(${radius}px at ${origin.x}px ${origin.y}px)`, `circle(0px at ${origin.x}px ${origin.y}px)`, true);
   if (ownSequence !== sequence) return;
   dialog.close(); phase = 'closed';
   panelWaves?.destruir(); panelWaves = null;
@@ -155,7 +163,7 @@ async function closeExperience() {
 el('explore').addEventListener('click', openExperience, options);
 el('expand').addEventListener('click', openExperience, options);
 el('close-experience').addEventListener('click', closeExperience, options);
-el('dialog-home').addEventListener('click', event => { event.preventDefault(); void closeExperience(); }, options);
+el('dialog-home').addEventListener('click', event => { event.preventDefault(); void closeExperience(event); }, options);
 dialog.addEventListener('cancel', event => { event.preventDefault(); void closeExperience(); }, options);
 document.querySelectorAll<HTMLElement>('[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view as View), options));
 document.querySelectorAll<HTMLElement>('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang as 'pt' | 'en'), options));
@@ -163,11 +171,39 @@ document.querySelectorAll<HTMLElement>('[data-agent]').forEach(button => button.
   const next = button.dataset.agent;
   if (agents.some(known => known === next)) setAgent(next as typeof agents[number]);
 }, options));
+function atualizarPaletas() {
+  document.querySelectorAll<HTMLElement>('[data-palette-choice]').forEach(button => {
+    const id = button.dataset.paletteChoice as keyof typeof temas;
+    button.querySelector('span')!.textContent = language === 'pt' ? temas[id].nome : temas[id].name;
+    button.setAttribute('aria-pressed', String(root.dataset.palette === id));
+  });
+}
+function fecharPaletas() { el('theme-picker').hidden = true; el('theme-toggle').setAttribute('aria-expanded', 'false'); }
 el('theme-toggle').addEventListener('click', () => {
-  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  el('theme-toggle').querySelector('use')!.setAttribute('href', `./assets/icons.svg#${root.dataset.theme === 'dark' ? 'sun' : 'moon'}`);
-  heroWaves.cores(); panelWaves?.cores();
+  const abrir = el('theme-picker').hidden;
+  el('theme-picker').hidden = !abrir; el('theme-toggle').setAttribute('aria-expanded', String(abrir));
+  if (abrir) el('theme-picker').querySelector<HTMLElement>('[aria-pressed="true"]')?.focus({preventScroll: true});
 }, options);
+document.querySelectorAll<HTMLElement>('[data-palette-choice]').forEach(button => button.addEventListener('click', () => {
+  const id = button.dataset.paletteChoice as keyof typeof temas;
+  root.dataset.palette = id; root.dataset.theme = temas[id].modo;
+  atualizarPaletas(); heroWaves.cores(); panelWaves?.cores(); fecharPaletas(); el('theme-toggle').focus({preventScroll: true});
+}, options));
+document.addEventListener('pointerdown', event => { if (!(event.target as Element).closest('.header-controls')) fecharPaletas(); }, options);
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && !el('theme-picker').hidden) { fecharPaletas(); el('theme-toggle').focus(); } }, options);
+const fineHover = matchMedia('(hover: hover) and (pointer: fine)');
+document.querySelectorAll<HTMLElement>('button:not([data-lang]), .text-link').forEach(button => {
+  button.classList.add('pinta');
+  function acender(event?: MouseEvent) { if (moving()) { pintura.acender(button, event); button.classList.add('iluminado'); } }
+  function apagar(event?: MouseEvent) { if (button.matches(':focus-visible')) return; if (moving() && button.classList.contains('iluminado')) pintura.apagar(button, pintura.pontoDo(button, event)); button.classList.remove('iluminado'); }
+  button.addEventListener('pointerenter', event => { if (fineHover.matches) acender(event); }, options);
+  button.addEventListener('pointerleave', apagar, options);
+  button.addEventListener('pointerdown', event => { if (event.pointerType !== 'mouse') acender(event); }, options);
+  button.addEventListener('pointerup', event => { if (event.pointerType !== 'mouse') apagar(event); }, options);
+  button.addEventListener('pointercancel', apagar, options);
+  button.addEventListener('focus', () => { if (button.matches(':focus-visible')) acender(); }, options);
+  button.addEventListener('blur', () => { if (!button.matches(':hover')) apagar(); }, options);
+});
 el('sample-form').addEventListener('submit', event => {
   event.preventDefault();
   const value = input.value.trim();
@@ -201,6 +237,6 @@ reduced.addEventListener('change', setMotion, options);
 window.addEventListener('pagehide', (event: PageTransitionEvent) => {
   if (event.persisted) return;
   events.abort(); clearTimeout(copyTimer); currentAnimation?.cancel();
-  heroWaves.destruir(); panelWaves?.destruir();
+  heroWaves.destruir(); panelWaves?.destruir(); seletor.destruir(); pintura.dispose();
 }, options);
 setLanguage(language); setMotion();

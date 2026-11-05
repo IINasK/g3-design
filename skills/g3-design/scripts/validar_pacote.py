@@ -46,14 +46,18 @@ def validar(raiz):
                 continue
             arquivos.append(caminho)
 
-    obrigatorios = ("SKILL.md", "agents/openai.yaml", "assets/papeis-de-cor.json", "scripts/validar_pacote.py")
+    obrigatorios = ("SKILL.md", "agents/openai.yaml", "assets/papeis-de-cor.json", "scripts/validar_pacote.py",
+                    "assets/movimento/nucleo-ondas.ts", "assets/movimento/fisica-fundo.ts",
+                    "assets/movimento/tipos-fundo.ts", "assets/movimento/pintura.ts",
+                    "assets/movimento/seletor.ts", "assets/movimento/presets.ts",
+                    "assets/movimento/interacoes.css", "assets/movimento/ondas-interativas.ts")
     presentes = {str(p.relative_to(raiz)).replace("\\", "/") for p in arquivos}
     for nome in obrigatorios:
         if nome not in presentes:
             erros.append(f"RECURSO_AUSENTE: {nome}")
 
     for arquivo in arquivos:
-        if arquivo.suffix not in {".md", ".yaml", ".yml", ".json"}:
+        if arquivo.suffix not in {".md", ".yaml", ".yml", ".json", ".ts", ".css"}:
             continue
         nome = arquivo.relative_to(raiz)
         try:
@@ -92,10 +96,10 @@ def validar(raiz):
             if not isinstance(dados, dict) or not isinstance(dados.get("temas"), dict):
                 raise ValueError("estrutura de temas inválida")
             temas = dados["temas"]
-            if set(temas) != {"claro", "escuro"}:
-                erros.append("PALETA: modos claro e escuro necessários")
+            if set(temas) != {"claro", "lavanda", "noite", "escuro"}:
+                erros.append("PALETA: quatro temas necessários")
             for modo, cores in temas.items():
-                papeis = ("fundo", "superficie", "texto", "textoSecundario", "borda", "foco", "acao", "textoSobreAcao")
+                papeis = ("fundo", "superficie", "texto", "textoSecundario", "acento", "borda", "foco", "acao", "textoSobreAcao")
                 if not isinstance(cores, dict) or any(not isinstance(cores.get(p), str) or not HEX.fullmatch(cores[p]) for p in papeis):
                     erros.append(f"PALETA: cores inválidas em {modo}")
                     continue
@@ -105,6 +109,18 @@ def validar(raiz):
                 for tinta, fundo, minimo in pares:
                     if contraste(cores[tinta], cores[fundo]) < minimo:
                         erros.append(f"CONTRASTE: {modo}/{tinta}/{fundo}")
+                if cores.get("modo") not in {"light", "dark"} or not all(isinstance(cores.get(p), str) and cores[p].strip() for p in ("nome", "name")):
+                    erros.append(f"PALETA: identificação inválida em {modo}")
+                for papel, tinta in (("pinturaAcao", "textoSobreAcao"), ("pinturaSuperficie", "texto")):
+                    gradiente = cores.get(papel)
+                    pontos = re.findall(r"#[0-9a-fA-F]{6}", gradiente) if isinstance(gradiente, str) else []
+                    if not pontos:
+                        erros.append(f"PALETA: gradiente inválido em {modo}/{papel}")
+                    elif any(contraste(cores[tinta], cor) < 4.5 for cor in pontos):
+                        erros.append(f"CONTRASTE: {modo}/{tinta}/{papel}")
+                ondas = cores.get("ondas")
+                if not isinstance(ondas, list) or len(ondas) != 3 or any(not isinstance(o, dict) or not isinstance(o.get("cores"), list) or len(o["cores"]) < 2 or any(not isinstance(c, str) or not HEX.fullmatch(c) for c in o["cores"]) for o in ondas):
+                    erros.append(f"PALETA: camadas de ondas inválidas em {modo}")
         except (ValueError, KeyError, TypeError, OSError, UnicodeError):
             erros.append("PALETA: estrutura inválida")
     return erros

@@ -101,7 +101,7 @@ dialog::backdrop { background: transparent; }
 .detail-tile svg { color: var(--muted); }
 .motion-control { position: relative; display: inline-flex; align-items: center; min-height: 44px; gap: 10px; cursor: pointer; font-size: 14px; border-radius: 8px; }
 .motion-control input { position: absolute; width: 24px; height: 24px; inset-inline-start: 0; margin: 0; opacity: 0; }
-.custom-check { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--border); border-radius: 7px; color: var(--text); background: transparent; }
+.custom-check { pointer-events: none; display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--border); border-radius: 7px; color: var(--text); background: transparent; }
 .custom-check svg { width: 15px; height: 15px; opacity: 0; transform: scale(.7); transition: opacity .2s, transform .2s var(--curve); }
 .motion-control input:checked + .custom-check svg { opacity: 1; transform: scale(1); }
 .motion-control input:focus-visible + .custom-check { outline: 2px solid var(--focus); outline-offset: 4px; }
@@ -178,3 +178,16 @@ dialog::backdrop { background: transparent; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
 }
+
+/* Palette picker stays compact; operational screens remain full-screen. */
+.header-controls { position: relative; }
+.theme-picker { position: absolute; z-index: 10; inset: calc(100% + 12px) 0 auto auto; width: 230px; padding: 8px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); box-shadow: 0 12px 30px -16px var(--primary); }
+.theme-picker[hidden] { display: none; }
+.theme-picker button { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid transparent; border-radius: 14px; background: transparent; color: var(--text); font: 500 15px var(--font); text-align: start; }
+.theme-picker [aria-pressed=true] { border-color: var(--border); }
+.theme-picker i { flex: none; width: 23px; height: 23px; border-radius: 50%; }
+.languages { font: 600 14px var(--font); }
+.languages .seletor-tinta > span { font: inherit; }
+.pinta { --pinta-cor: var(--paint-surface); }
+.primary.pinta, .expand-chip.pinta, .agents [aria-pressed=true].pinta, .experience-nav [aria-pressed=true].pinta { --pinta-cor: var(--paint-action); }
+@media (hover: hover) and (pointer: fine) { .agents button:hover { background: var(--surface); } .agents [aria-pressed=true]:hover { background: var(--primary); color: var(--on-primary); } }

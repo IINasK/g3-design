@@ -10,7 +10,7 @@ Use a implementação aprovada do destino para obter valores, estados e moviment
   para cada renderizador. Cores de screenshot não viram constantes nos componentes.
 - A paleta do projeto tem precedência. Os
   [papéis de referência](../assets/papeis-de-cor.json) são uma opção inicial para
-  projeto sem paleta, derivados do Corporativo claro e escuro aprovados.
+  projeto sem paleta, com Corporativo, Lavanda, Noite e Corporativo Escuro.
 - Texto normal precisa de contraste mínimo 4,5:1. Texto grande pode usar 3:1.
   Contornos e estados necessários para reconhecer controles precisam de 3:1
   com a cor adjacente. Meça a transparência sobre o fundo real.

@@ -1,0 +1,24 @@
+@property --apaga-raio { syntax: '<length>'; inherits: false; initial-value: 0px; }
+.pinta { position: relative; isolation: isolate; }
+.pinta::before {
+  content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+  pointer-events: none; background: var(--pinta-cor);
+  --pinta-raio: 0px; --apaga-raio: 0px;
+  clip-path: circle(var(--pinta-raio) at var(--pinta-x, 50%) var(--pinta-y, 50%));
+  mask: radial-gradient(circle at var(--apaga-x, 50%) var(--apaga-y, 50%), transparent calc(var(--apaga-raio) - 1px), #000 var(--apaga-raio));
+  transition: clip-path var(--tempo-pintura, 820ms) var(--curva-pintura, cubic-bezier(.22,1,.36,1)), --apaga-raio var(--tempo-apagar, 820ms) var(--curva-pintura, cubic-bezier(.22,1,.36,1));
+}
+.pinta.iluminado::before, .pinta.apagando::before { --pinta-raio: var(--pinta-alvo, 0px); }
+.pinta.apagando::before { --apaga-raio: var(--apaga-alvo, 0px); }
+.pinta.pinta-instante::before { transition: none; }
+.seletor-deslizante { display: inline-block; }
+.seletor-conteudo { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); isolation: isolate; min-width: 0; }
+.seletor-deslizante[data-seletor-opcoes='3'] .seletor-conteudo,
+.seletor-deslizante[data-seletor-opcoes='3'] .seletor-tinta { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.seletor-deslizante .seletor-conteudo > button[aria-pressed] { color: var(--text); background: transparent; transition: none; }
+.seletor-capsula { position: absolute; inset: 0 auto 0 0; width: 50%; z-index: 2; border-radius: 999px; background: var(--primary); box-shadow: inset 0 0 0 1.5px var(--accent); pointer-events: none; transform-origin: 50% 50%; }
+.seletor-deslizante[data-seletor-opcoes='3'] .seletor-capsula { width: calc(100% / 3); }
+.seletor-recorte { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.seletor-tinta { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: 100%; height: 100%; color: var(--on-primary); }
+.seletor-tinta > span { display: grid; place-items: center; font: inherit; }
+@media (prefers-reduced-motion: reduce) { .pinta::before { transition: none; } }

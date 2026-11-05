@@ -161,9 +161,11 @@ test('light and dark previews load without script or CSP errors', async ({page},
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await ready(page, '?lang=en');
   await page.getByRole('button', {name: 'Switch theme'}).click();
+  await page.getByRole('button', {name: 'Corporate Dark', exact: true}).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.screenshot({path: info.outputPath('dark.png'), fullPage: true});
   await page.getByRole('button', {name: 'Switch theme'}).click();
+  await page.getByRole('button', {name: 'Corporate', exact: true}).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   expect(errors).toEqual([]);
 });

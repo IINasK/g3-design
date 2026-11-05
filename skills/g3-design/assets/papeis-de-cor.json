@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "origem": "Papéis aprovados G3 Design Corporativo, claro e escuro",
+  "origem": "G3 Design — Corporativo, Lavanda, Noite e Corporativo Escuro",
   "uso": "Base opcional para projeto sem paleta própria. Centralizar no tema do destino.",
   "temas": {
     "claro": {
@@ -12,7 +12,129 @@
       "borda": "#0F1E36",
       "foco": "#0F1E36",
       "acao": "#0F1E36",
-      "textoSobreAcao": "#FFFFFF"
+      "textoSobreAcao": "#FFFFFF",
+      "nome": "Corporativo",
+      "name": "Corporate",
+      "modo": "light",
+      "pinturaAcao": "linear-gradient(135deg, #0F1E36 0%, #0F1E36 45%, #857057 100%)",
+      "pinturaSuperficie": "linear-gradient(140deg, #FFFFFF, #e3e6e8)",
+      "ondas": [
+        {
+          "cores": [
+            "#3a4b5c",
+            "#253549",
+            "#0f1e36"
+          ],
+          "filete": {
+            "cor": "#CDAA80",
+            "espessuraPx": 0.55,
+            "pincelada": {
+              "espessuraMaximaPx": 12,
+              "luz": "#f3eadf",
+              "sombra": "#ab9173",
+              "nucleo": 0.72,
+              "sensibilidadeDaLuz": 3
+            }
+          }
+        },
+        {
+          "cores": [
+            "#3a4b5c",
+            "#0f1e36"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#3a4b5c",
+            "#253549",
+            "#0f1e36"
+          ],
+          "filete": null
+        }
+      ]
+    },
+    "lavanda": {
+      "fundo": "#ffffff",
+      "superficie": "#ffffff",
+      "texto": "#221d33",
+      "textoSecundario": "#625b7c",
+      "acento": "#ff9b73",
+      "borda": "#5b3fd8",
+      "foco": "#5b3fd8",
+      "acao": "#5b3fd8",
+      "textoSobreAcao": "#ffffff",
+      "nome": "Lavanda",
+      "name": "Lavender",
+      "modo": "light",
+      "pinturaAcao": "linear-gradient(135deg, #5b3fd8, #7b5cf0)",
+      "pinturaSuperficie": "linear-gradient(140deg, #ffffff, #ededef)",
+      "ondas": [
+        {
+          "cores": [
+            "#ff9b73",
+            "#e7699f",
+            "#b76fe0"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#c3b0ff",
+            "#8f72f4"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#9f86ff",
+            "#7b5cf0",
+            "#5b3fd8"
+          ],
+          "filete": null
+        }
+      ]
+    },
+    "noite": {
+      "fundo": "#15121d",
+      "superficie": "#242032",
+      "texto": "#ece8f6",
+      "textoSecundario": "#a79fc2",
+      "acento": "#f89e7a",
+      "borda": "#f89e7a",
+      "foco": "#f89e7a",
+      "acao": "#6047d0",
+      "textoSobreAcao": "#ffffff",
+      "nome": "Noite",
+      "name": "Night",
+      "modo": "dark",
+      "pinturaAcao": "linear-gradient(135deg, #6047d0, #735dd6)",
+      "pinturaSuperficie": "linear-gradient(140deg, #242032, #484455)",
+      "ondas": [
+        {
+          "cores": [
+            "#f89e7a",
+            "#e16fa0",
+            "#b575da"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#c5b4fb",
+            "#9379ee"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#a38cf9",
+            "#7f63e9",
+            "#6047d0"
+          ],
+          "filete": null
+        }
+      ]
     },
     "escuro": {
       "fundo": "#151c28",
@@ -23,7 +145,47 @@
       "borda": "#CDAA80",
       "foco": "#CDAA80",
       "acao": "#0F1E36",
-      "textoSobreAcao": "#FFFFFF"
+      "textoSobreAcao": "#FFFFFF",
+      "nome": "Corporativo Escuro",
+      "name": "Corporate Dark",
+      "modo": "dark",
+      "pinturaAcao": "linear-gradient(135deg, #0F1E36 0%, #0F1E36 45%, #857057 100%)",
+      "pinturaSuperficie": "linear-gradient(140deg, #424f61, #596474)",
+      "ondas": [
+        {
+          "cores": [
+            "#3a4b5c",
+            "#253549",
+            "#0f1e36"
+          ],
+          "filete": {
+            "cor": "#CDAA80",
+            "espessuraPx": 0.55,
+            "pincelada": {
+              "espessuraMaximaPx": 12,
+              "luz": "#f3eadf",
+              "sombra": "#ab9173",
+              "nucleo": 0.72,
+              "sensibilidadeDaLuz": 3
+            }
+          }
+        },
+        {
+          "cores": [
+            "#3a4b5c",
+            "#0f1e36"
+          ],
+          "filete": null
+        },
+        {
+          "cores": [
+            "#3a4b5c",
+            "#253549",
+            "#0f1e36"
+          ],
+          "filete": null
+        }
+      ]
     }
   }
 }
