@@ -1,71 +1,94 @@
 # G3 Design
 
-**Projeto em desenvolvimento: uma linguagem de design limpa, elegante e moderna.**
+[Português](README.md) · [English](README.en.md)
 
-Uma skill portátil para orientar agentes de IA na criação e revisão de interfaces
-web, desktop e móveis. O foco é manter consistência visual, reutilizar componentes
-existentes e adaptar a implementação à plataforma e à identidade de cada projeto.
+[![G3 Design — Minimalismo com presença.](docs/assets/banner-pt.png)](https://iinask.github.io/g3-design/?lang=pt)
 
-## Proposta
+## Minimalismo com presença.
 
-- Interfaces com hierarquia clara, cantos arredondados e profundidade discreta.
-- Campos, bordas e estados de foco com geometria consistente.
-- Reutilização de bibliotecas de componentes e ícones oficiais licenciados.
-- Temas claro e escuro por papéis semânticos, com atenção ao contraste.
-- Responsividade, acessibilidade e animações com movimento reduzido.
-- Auditoria da interface em execução, incluindo conteúdo longo e mudanças de largura.
+Componentes limpos, ondas orgânicas e transições com intenção. G3 Design é uma skill para criar interfaces elegantes, com uma identidade que se reconhece.
 
-A skill descobre a stack, a marca e os componentes do projeto de destino antes
-de sugerir alterações. Sua base de cores e medidas é opcional: referências e
-componentes já aprovados no destino têm precedência.
+**Versão oficial 1.0.0 · Em desenvolvimento ativo.** As versões anteriores eram protótipos.
+As instruções e os exemplos podem evoluir.
 
-## Estado do projeto
+**[→ Experimentar a demonstração interativa](https://iinask.github.io/g3-design/?lang=pt)**
 
-**Em desenvolvimento ativo.** As instruções, referências e validações podem evoluir.
-Esta é a **versão oficial 1.0.0**. As versões anteriores eram protótipos.
-As orientações não garantem, sozinhas,
-qualidade visual, segurança ou desempenho: a interface produzida precisa ser
-conferida no ambiente real de cada projeto.
+Teste o campo editável, o feedback dos botões, os temas claro/escuro e o menu que se expande para outra tela. A demonstração alterna entre português e inglês.
 
-## Instalação e uso
+O README do GitHub exibe um banner clicável. A experiência interativa funciona no GitHub Pages.
 
-A pasta completa da skill é [`skills/g3-design`](skills/g3-design/SKILL.md).
+## Instalar
 
-1. Copie essa pasta para o diretório de skills reconhecido pelo seu agente.
-2. Preserve `references`, `assets`, `examples`, `scripts` e `agents` junto de `SKILL.md`.
-3. Invoque a skill pelo nome `g3-design`, conforme o formato do agente.
+Requer **Node.js 22.20+**, npm/npx e Git. Execute na pasta do seu projeto. O comando instala a skill completa para o agente escolhido nesse projeto, sem alterar configurações globais.
 
-Exemplo de pedido:
+### Claude Code
 
-> Use a skill G3 Design para revisar os campos e menus deste projeto. Preserve os
-> componentes e ícones existentes, corrija os recortes de borda e confira o
-> resultado no celular e no computador.
-
-## Organização
-
-```text
-skills/g3-design/
-  SKILL.md                  Entrada e critérios de aplicação
-  references/               Linguagem visual, geometria, ícones e auditoria
-  assets/                   Papéis de cor opcionais
-  examples/                 Exemplo de contrato visual
-  agents/                   Metadados de descoberta
-  scripts/                  Verificador estrutural do pacote
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent claude-code --copy --yes
 ```
 
-O pacote não exige framework específico nem dependências de infraestrutura.
-Python 3.9 ou superior é necessário apenas para executar o verificador e os testes.
+### Codex
 
-## Verificação
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent codex --copy --yes
+```
 
-Na raiz deste repositório:
+### Cursor
 
-```console
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent cursor --copy --yes
+```
+
+### Gemini CLI
+
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent gemini-cli --copy --yes
+```
+
+### GitHub Copilot
+
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent github-copilot --copy --yes
+```
+
+### Antigravity
+
+```sh
+npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent antigravity --copy --yes
+```
+
+Depois, peça ao agente:
+
+> Use a skill G3 Design. Reutilize os componentes e ícones deste projeto, preserve sua identidade e audite o resultado no celular e no computador.
+
+### Instalação manual
+
+Copie a pasta inteira [`skills/g3-design`](skills/g3-design/SKILL.md) para o diretório de skills do seu agente. Preserve referências, assets, exemplos, scripts e metadados juntos.
+
+## O que a skill orienta
+
+- Campos, bordas, espaçamentos, foco e estados consistentes.
+- Reutilização de componentes e ícones oficiais licenciados.
+- Temas claro/escuro por papéis semânticos e contraste.
+- Responsividade, interação acessível e movimento reduzido.
+- Conferência visual e de desempenho no ambiente real.
+
+A stack, a marca e os componentes aprovados no projeto de destino têm precedência. A skill não exige um framework específico. O piloto é um exemplo, não uma garantia automática de qualidade visual, segurança ou desempenho.
+
+## Desenvolvimento e verificação
+
+```sh
+npm ci
+npm run check
+npm run build
+npx playwright install chromium
+npm run test:demo
 python -B skills/g3-design/scripts/validar_pacote.py
 python -B -m unittest discover -s tests -p test_validar_pacote.py -v
 ```
 
-O verificador confere recursos, referências Markdown, heurísticas de caminhos e
-pares sólidos de cor. Não certifica a interface renderizada, transparências ou
-ausência completa de acoplamento. Um teste de links simbólicos pode ser ignorado
-explicitamente quando o sistema operacional não permitir criá-los.
+O piloto usa HTML/CSS e TypeScript compilado, sem dependências de framework em execução. Python 3.9+ é usado nas verificações da skill e no servidor local dos testes.
+
+Um teste real de link simbólico pode ser ignorado explicitamente quando o sistema operacional recusar sua criação. Emulação no navegador não substitui teste em aparelho físico.
+
+Referências técnicas: [comandos do instalador](https://github.com/vercel-labs/skills/blob/main/docs/commands.md), [agentes suportados](https://github.com/vercel-labs/skills/blob/main/docs/agents.md), [licenças de fontes e ícones](docs/assets/THIRD-PARTY-NOTICES.md).

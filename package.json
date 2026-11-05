@@ -1,0 +1,16 @@
+{
+  "name": "g3-design",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-demo.mjs",
+    "check": "tsc --noEmit",
+    "test:demo": "playwright test --config tests/demo.config.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,26 @@
+/* Generated from the skill's shared color roles. */
+:root, [data-theme="light"] {
+  --page: #F8F9FA;
+  --surface: #FFFFFF;
+  --text: #1A1A1A;
+  --muted: #3A4B5C;
+  --accent: #CDAA80;
+  --border: #0F1E36;
+  --focus: #0F1E36;
+  --primary: #0F1E36;
+  --on-primary: #FFFFFF;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --page: #151c28;
+  --surface: #18283e;
+  --text: #FFFFFF;
+  --muted: #c4c9ce;
+  --accent: #CDAA80;
+  --border: #CDAA80;
+  --focus: #CDAA80;
+  --primary: #0F1E36;
+  --on-primary: #FFFFFF;
+  color-scheme: dark;
+}
