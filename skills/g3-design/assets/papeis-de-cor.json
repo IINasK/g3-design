@@ -1,7 +1,6 @@
 {
   "versao": 1,
-  "origem": "Papéis aprovados G3 V2 Corporativo, claro e escuro",
-  "revisao": "bad776f2e3dc9d8b8602de5020dcad20dcf953fc",
+  "origem": "Papéis aprovados G3 Design Corporativo, claro e escuro",
   "uso": "Base opcional para projeto sem paleta própria. Centralizar no tema do destino.",
   "temas": {
     "claro": {

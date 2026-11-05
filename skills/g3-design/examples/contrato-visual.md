@@ -5,7 +5,7 @@ campo e botão e um catálogo de ícones já adotado.
 
 ## Pedido
 
-Compactar a pesquisa no celular e corrigir sua borda cortada, seguindo G3 V2
+Compactar a pesquisa no celular e corrigir sua borda cortada, seguindo G3 Design
 e preservando o funcionamento da busca.
 
 ## Decisões verificáveis

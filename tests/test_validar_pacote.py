@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 
-FONTE = Path(__file__).resolve().parents[1] / "skills/g3-design-v2"
+FONTE = Path(__file__).resolve().parents[1] / "skills/g3-design"
 SPEC = importlib.util.spec_from_file_location("fiscal_skill", FONTE / "scripts/validar_pacote.py")
 FISCAL = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(FISCAL)
@@ -19,7 +19,7 @@ class FiscalDoPacote(unittest.TestCase):
     def setUp(self):
         self.temporario = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporario.cleanup)
-        self.copia = Path(self.temporario.name) / "outro-projeto/g3-design-v2"
+        self.copia = Path(self.temporario.name) / "outro-projeto/g3-design"
         shutil.copytree(FONTE, self.copia, ignore=shutil.ignore_patterns("__pycache__"))
 
     def editar_entrada(self, trecho):

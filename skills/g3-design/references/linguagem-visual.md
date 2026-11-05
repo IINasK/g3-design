@@ -38,7 +38,7 @@ Use a implementação aprovada do destino para obter valores, estados e moviment
 ## Base para adoção nova
 
 Sem componente ou medida aprovada no destino, esta base reproduz a família de
-campos cadastrais G3 V2. Centralize-a em tokens do destino. Não a aplique sobre
+campos cadastrais G3 Design. Centralize-a em tokens do destino. Não a aplique sobre
 folhas de documento ou widgets existentes que tenham outro contrato aprovado.
 
 | Papel | Referência inicial |
