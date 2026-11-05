@@ -8,7 +8,7 @@
 
 Componentes limpos, ondas orgânicas e transições com intenção. G3 Design é uma skill para criar interfaces elegantes, com uma identidade que se reconhece.
 
-**Versão oficial 1.0.0 · Em desenvolvimento ativo.** As versões anteriores eram protótipos.
+**Versão oficial 1.1.0 · Em desenvolvimento ativo.** As versões anteriores eram protótipos.
 As instruções e os exemplos podem evoluir.
 
 **[→ Experimentar a demonstração interativa](https://iinask.github.io/g3-design/?lang=pt)**
@@ -24,37 +24,37 @@ Requer **Node.js 22.20+**, npm/npx e Git. Execute na pasta do seu projeto. O com
 ### Claude Code
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent claude-code --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent claude-code --copy --yes
 ```
 
 ### Codex
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent codex --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent codex --copy --yes
 ```
 
 ### Cursor
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent cursor --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent cursor --copy --yes
 ```
 
 ### Gemini CLI
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent gemini-cli --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent gemini-cli --copy --yes
 ```
 
 ### GitHub Copilot
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent github-copilot --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent github-copilot --copy --yes
 ```
 
 ### Antigravity
 
 ```sh
-npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent antigravity --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent antigravity --copy --yes
 ```
 
 Depois, peça ao agente:
@@ -64,6 +64,24 @@ Depois, peça ao agente:
 ### Instalação manual
 
 Copie a pasta inteira [`skills/g3-design`](skills/g3-design/SKILL.md) para o diretório de skills do seu agente. Preserve referências, assets, exemplos, scripts e metadados juntos.
+
+## Atualizar uma instalação existente
+
+1. Confira a versão e as notas em [Releases](https://github.com/IINasK/g3-design/releases/latest).
+2. Na pasta do projeto, execute novamente o comando de instalação acima para o seu agente. Ele já aponta para **v1.1.0** e mantém o modo de cópia.
+3. Se a mudança não aparecer, abra uma nova sessão ou reinicie seu aplicativo de IA.
+
+Guarde suas adaptações locais antes: reinstalar substitui os arquivos da skill.
+Isso não altera automaticamente as telas que ela já ajudou a criar. Instalação
+por ZIP é atualizada substituindo a pasta completa pela do ZIP da nova release.
+Se instalou globalmente, acrescente `--global` ao comando; preserve o mesmo escopo.
+
+O `1.7.6` no comando é a versão do instalador; `v1.1.0` na URL é a versão da G3 Design.
+`main` é desenvolvimento. Os comandos `skills check`/`skills update` não selecionam,
+por si, a última release estável: para seguir esta política, reinstale pela tag
+indicada na release. Para voltar, use o comando ou ZIP da versão anterior.
+
+Veja [o que mudou](CHANGELOG.md) e a [política de publicação](RELEASING.md).
 
 ## O que a skill orienta
 
@@ -81,6 +99,7 @@ A stack, a marca e os componentes aprovados no projeto de destino têm precedên
 ```sh
 npm ci
 npm run check
+npm run test:release
 npm run build
 npx playwright install chromium
 npm run test:demo

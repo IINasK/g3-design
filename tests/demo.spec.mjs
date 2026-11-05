@@ -1,4 +1,6 @@
 import {test, expect} from '@playwright/test';
+import {readFile} from 'node:fs/promises';
+const {version} = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 
 async function ready(page, query = '?lang=pt') {
   await page.goto('/' + query);
@@ -113,9 +115,12 @@ test('responsive fields and focus stay inside their frame', async ({page}) => {
 test('agent commands and clipboard match the selected target', async ({page, context}) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await ready(page);
+  await expect(page.locator('[data-version]')).toHaveText(version);
+  await expect(page.locator('[data-i18n="status"]')).toContainText(version);
   for (const [label, id] of [['Claude Code', 'claude-code'], ['Codex', 'codex'], ['Cursor', 'cursor'], ['Gemini CLI', 'gemini-cli'], ['GitHub Copilot', 'github-copilot'], ['Antigravity', 'antigravity']]) {
     await page.getByRole('button', {name: label, exact: true}).click();
     await expect(page.locator('#install-command')).toContainText('--agent ' + id);
+    await expect(page.locator('#install-command')).toContainText(`https://github.com/IINasK/g3-design/tree/v${version}`);
   }
   await page.getByRole('button', {name: 'Copiar comando'}).click();
   await expect(page.locator('#copy-feedback')).toHaveText('Comando copiado.');

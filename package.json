@@ -1,12 +1,13 @@
 {
   "name": "g3-design",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node scripts/build-demo.mjs",
-    "check": "tsc --noEmit",
-    "test:demo": "playwright test --config tests/demo.config.mjs"
+    "check": "tsc --noEmit && node scripts/check-release.mjs",
+    "test:demo": "playwright test --config tests/demo.config.mjs",
+    "test:release": "node --test tests/release.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

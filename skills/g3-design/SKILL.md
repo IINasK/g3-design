@@ -8,7 +8,7 @@ description: >-
   vêm do projeto de destino.
 metadata:
   author: G3 Design
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # G3 Design

@@ -1,3 +1,4 @@
+import {version} from '../../package.json';
 import {montarOndas} from './ondas';
 import {criarPintura} from '../../skills/g3-design/assets/movimento/pintura';
 import {montarSeletorDeslizante} from '../../skills/g3-design/assets/movimento/seletor';
@@ -5,7 +6,7 @@ import {MOVIMENTO} from '../../skills/g3-design/assets/movimento/presets';
 import {temas} from '../../skills/g3-design/assets/papeis-de-cor.json';
 
 const pt = {
-  status: '1.0.0 · EM DESENVOLVIMENTO', heading: 'Minimalismo.', headingAccent: 'Com presença.',
+  status: `${version} · EM DESENVOLVIMENTO`, heading: 'Minimalismo.', headingAccent: 'Com presença.',
   description: 'Design limpo, movimento sutil e uma identidade que se reconhece. Uma skill para criar interfaces elegantes, sem perder a vida.',
   explore: 'Experimentar', install: 'Instalar a skill', builtFor: 'Feita para a sua próxima interface.',
   theme: 'Mudar tema', livePreview: 'PREVIEW INTERATIVO', cardBadge: 'A forma encontra a função',
@@ -30,7 +31,7 @@ const pt = {
   motionCopy: 'Ondas orgânicas e transições acompanham a interação. O movimento dá continuidade à experiência e respeita quem prefere tudo mais tranquilo.',
 };
 const en: Record<keyof typeof pt, string> = {
-  status: '1.0.0 · IN DEVELOPMENT', heading: 'Minimal design.', headingAccent: 'With presence.',
+  status: `${version} · IN DEVELOPMENT`, heading: 'Minimal design.', headingAccent: 'With presence.',
   description: 'Clean design, subtle motion and a recognizable identity. A skill for creating elegant interfaces that still feel alive.',
   explore: 'Try the experience', install: 'Install the skill', builtFor: 'Made for your next interface.',
   theme: 'Switch theme', livePreview: 'INTERACTIVE PREVIEW', cardBadge: 'Where form meets function',
@@ -95,7 +96,7 @@ function setView(next: View, animate = true) {
 function setAgent(next: typeof agents[number]) {
   agent = next;
   document.querySelectorAll<HTMLElement>('[data-agent]').forEach(node => node.setAttribute('aria-pressed', String(node.dataset.agent === agent)));
-  el('install-command').textContent = `npx --yes skills@1.7.6 add IINasK/g3-design --skill g3-design --agent ${agent} --copy --yes`;
+  el('install-command').textContent = `npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v${version} --skill g3-design --agent ${agent} --copy --yes`;
   el('copy-feedback').textContent = text('installHint');
 }
 function setLanguage(next: 'pt' | 'en') {
@@ -239,4 +240,5 @@ window.addEventListener('pagehide', (event: PageTransitionEvent) => {
   events.abort(); clearTimeout(copyTimer); currentAnimation?.cancel();
   heroWaves.destruir(); panelWaves?.destruir(); seletor.destruir(); pintura.dispose();
 }, options);
+document.querySelectorAll<HTMLElement>('[data-version]').forEach(node => { node.textContent = version; });
 setLanguage(language); setMotion();

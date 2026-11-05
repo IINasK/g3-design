@@ -2,8 +2,16 @@ import {readFile, writeFile, copyFile} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {fileURLToPath} from 'node:url';
 import {MOVIMENTO} from '../skills/g3-design/assets/movimento/presets.ts';
+import {checkRelease} from './check-release.mjs';
 
 const root = new URL('../', import.meta.url);
+const {version, source} = await checkRelease(root);
+const indexFile = new URL('docs/index.html', root);
+const html = (await readFile(indexFile, 'utf8'))
+  .replace(/(<span data-i18n="status">)[^<]*(<\/span>)/, (_, before, after) => `${before}${version} · EM DESENVOLVIMENTO${after}`)
+  .replace(/(<span data-version>)[^<]*(<\/span>)/, (_, before, after) => `${before}${version}${after}`)
+  .replace(/(<code id="install-command">)[^<]*(<\/code>)/, (_, before, after) => `${before}npx --yes skills@1.7.6 add ${source} --skill g3-design --agent claude-code --copy --yes${after}`);
+await writeFile(indexFile, html);
 const {temas} = JSON.parse(await readFile(new URL('skills/g3-design/assets/papeis-de-cor.json', root), 'utf8'));
 const roles = {fundo: 'page', superficie: 'surface', texto: 'text', textoSecundario: 'muted', acento: 'accent', borda: 'border', foco: 'focus', acao: 'primary', textoSobreAcao: 'on-primary'};
 const css = Object.entries(temas).map(([name, colors]) => {

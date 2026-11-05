@@ -8,3 +8,5 @@ Thumbs.db
 node_modules/
 test-results/
 playwright-report/
+g3-design-v*.zip
+SHA256SUMS.txt
