@@ -5,6 +5,32 @@ async function ready(page, query = '?lang=pt') {
   await page.evaluate(() => document.fonts.ready);
 }
 
+test('installation action shares the button geometry and keeps its arrow inside', async ({page}) => {
+  for (const width of [320, 390, 700, 1240]) {
+    await page.setViewportSize({width, height: 900});
+    for (const lang of ['pt', 'en']) {
+      await ready(page, '?lang=' + lang);
+      const link = page.locator('.text-link');
+      await link.hover();
+      await page.waitForTimeout(270);
+      const geometry = await link.evaluate(node => {
+        const box = node.getBoundingClientRect(), text = node.querySelector('span').getBoundingClientRect(), icon = node.querySelector('svg').getBoundingClientRect();
+        const first = document.querySelector('#explore').getBoundingClientRect();
+        return {height: box.height, primaryHeight: first.height, left: text.left - box.left, right: box.right - icon.right,
+          aligned: Math.abs((text.top + text.bottom) / 2 - (icon.top + icon.bottom) / 2), radius: parseFloat(getComputedStyle(node).borderRadius), overflow: document.documentElement.scrollWidth - innerWidth};
+      });
+      expect(geometry.height).toBe(geometry.primaryHeight);
+      expect(geometry.left).toBeGreaterThanOrEqual(16);
+      expect(geometry.right).toBeGreaterThanOrEqual(16);
+      expect(geometry.radius).toBeGreaterThanOrEqual(geometry.height / 2);
+      expect(geometry.aligned).toBeLessThanOrEqual(1);
+      expect(geometry.overflow).toBe(0);
+    }
+  }
+  await page.locator('.text-link').click();
+  await expect(page).toHaveURL(/#install$/);
+});
+
 test('card and expansion keep separate areas in both languages', async ({page}) => {
   for (const lang of ['pt', 'en']) {
     await ready(page, '?lang=' + lang);

@@ -36,7 +36,7 @@ h1 { font-size: clamp(38px, 4.8vw, 64px); line-height: 1.08; letter-spacing: -2.
 .intro-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; margin-top: 30px; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 52px; padding: 10px 23px; border: 1px solid var(--border); border-radius: 999px; font-size: 16px; font-weight: 600; transition: transform .24s var(--curve), box-shadow .24s, background .24s; }
 .primary { background: var(--primary); color: var(--on-primary); border-color: var(--border); }
-.text-link { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; font-size: 15px; font-weight: 500; border-radius: 8px; }
+.text-link { background: var(--surface); color: var(--text); }
 .text-link svg { width: 17px; height: 17px; transition: transform .24s var(--curve); }
 .caption { font-size: 13px; color: var(--muted); }
 .intro > .caption { margin-top: 26px; }
@@ -110,7 +110,7 @@ dialog::backdrop { background: transparent; }
 @media (hover: hover) and (pointer: fine) {
   .button:hover, .icon-button:hover, .expand-chip:hover { box-shadow: 3px 8px 15px -8px color-mix(in srgb,var(--primary) 40%,transparent); }
   .button:hover > span, .button:hover > svg, .icon-button:hover > svg, .expand-chip:hover > span, .expand-chip:hover > svg { transform: translateY(-2px); }
-  .text-link:hover svg { transform: translateX(4px); }
+  .text-link:hover svg { transform: translate(4px, -2px); }
   .agents button:hover { background: color-mix(in srgb,var(--accent) 20%,var(--surface)); color: var(--text); }
   .experience-nav button:hover > span, .experience-nav button:hover > svg { transform: translateX(4px); }
 }
@@ -141,7 +141,7 @@ dialog::backdrop { background: transparent; }
   .intro { padding: 0; }
   h1 { font-size: clamp(42px,10vw,64px); margin: 22px 0; }
   .intro-copy { max-width: 460px; font-size: 17px; }
-  .intro-actions { gap: 20px; margin-top: 23px; }
+  .intro-actions { gap: 12px; margin-top: 23px; }
   .intro > .caption { margin-top: 18px; }
   .visual { min-height: 430px; border-radius: 26px; }
   .sample-card { width: calc(100% - 48px); max-width: 440px; margin-inline-start: 20px; padding: 22px; }
@@ -173,7 +173,6 @@ dialog::backdrop { background: transparent; }
   .segmented button { padding-inline: 6px; }
   .sample-card { margin-inline-start: 14px; width: calc(100% - 28px); padding: 20px; }
   .intro-actions { gap: 10px; }
-  .text-link { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
