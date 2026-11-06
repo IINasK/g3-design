@@ -8,7 +8,7 @@ description: >-
   vêm do projeto de destino.
 metadata:
   author: G3 Design
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # G3 Design
@@ -68,6 +68,22 @@ isolada não demonstram aparência, continuidade, origem ou ausência de resídu
 Ao incorporar um aprendizado, mantenha causa, regra reutilizável e prova na
 referência responsável. Medidas particulares ficam no componente/preset do destino.
 Não crie outra camada, regra por tela ou script quando a peça existente resolve.
+
+## Relatos durante o uso
+
+Ao encontrar um defeito ou aprendizado desta skill, registre um relato curto pelo
+[modelo](examples/relato-uso.md), sem interromper a tarefa para melhorar a skill.
+Use o destino autorizado nas instruções do projeto; na ausência dele, consulte a
+variável de ambiente `G3_DESIGN_RELATOS_DIR`. Ela aponta para uma pasta local,
+não para um serviço de envio. Sem destino acessível, guarde no registro de relatos
+já adotado ou em `docs/relatos-g3-design/` do projeto e informe o caminho na entrega.
+
+Um arquivo por achado, com data/projeto/assunto no nome; registre versão, esperado,
+observado, reprodução, caminhos de evidência e correção local, quando houver.
+Causa desconhecida permanece desconhecida. Não copie dados pessoais, credenciais,
+conversas ou fontes inteiros. Não envie a GitHub ou outro serviço, não contorne
+restrições de acesso nem altere a skill central a partir do projeto consumidor.
+A manutenção central valida o aprendizado e publica a melhoria separadamente.
 
 ## Conferência do pacote
 

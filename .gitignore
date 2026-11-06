@@ -10,3 +10,6 @@ test-results/
 playwright-report/
 g3-design-v*.zip
 SHA256SUMS.txt
+
+# Relatos e evidências privados de projetos de origem
+.local/

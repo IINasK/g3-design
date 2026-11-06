@@ -8,7 +8,7 @@
 
 Clean components, organic waves and purposeful transitions. G3 Design is a skill for creating elegant interfaces with a recognizable identity.
 
-**Official version 1.1.0 · In active development.** Earlier versions were prototypes.
+**Official version 1.2.0 · In active development.** Earlier versions were prototypes.
 Instructions and examples may evolve.
 
 **[→ Try the interactive demo](https://iinask.github.io/g3-design/?lang=en)**
@@ -24,37 +24,37 @@ Requires **Node.js 22.20+**, npm/npx and Git. Run the command in your project fo
 ### Claude Code
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent claude-code --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent claude-code --copy --yes
 ```
 
 ### Codex
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent codex --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent codex --copy --yes
 ```
 
 ### Cursor
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent cursor --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent cursor --copy --yes
 ```
 
 ### Gemini CLI
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent gemini-cli --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent gemini-cli --copy --yes
 ```
 
 ### GitHub Copilot
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent github-copilot --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent github-copilot --copy --yes
 ```
 
 ### Antigravity
 
 ```sh
-npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.1.0 --skill g3-design --agent antigravity --copy --yes
+npx --yes skills@1.7.6 add https://github.com/IINasK/g3-design/tree/v1.2.0 --skill g3-design --agent antigravity --copy --yes
 ```
 
 Then ask your agent:
@@ -68,7 +68,7 @@ Copy the entire [`skills/g3-design`](skills/g3-design/SKILL.md) folder to your a
 ## Update an existing installation
 
 1. Read the version and notes on [Releases](https://github.com/IINasK/g3-design/releases/latest).
-2. In your project folder, run the installation command above for your agent again. It is already pinned to **v1.1.0** and preserves copy mode.
+2. In your project folder, run the installation command above for your agent again. It is already pinned to **v1.2.0** and preserves copy mode.
 3. If the change does not appear, start a new session or restart your AI application.
 
 Save local customizations first: reinstalling replaces the skill files. It does
@@ -76,7 +76,7 @@ not automatically change interfaces previously created with the skill. For a ZIP
 installation, replace the whole skill folder with the new release's copy.
 For a global installation, add `--global`; keep the same installation scope.
 
-`1.7.6` is the installer version; `v1.1.0` in the URL is the G3 Design version.
+`1.7.6` is the installer version; `v1.2.0` in the URL is the G3 Design version.
 `main` is development. `skills check`/`skills update` do not, by themselves, select
 the latest stable release. Follow this policy by reinstalling the tag listed on
 the release. To roll back, use the command or ZIP from the previous version.
@@ -93,6 +93,12 @@ See [what changed](CHANGELOG.md) and the [release policy](RELEASING.md).
 - Real-world visual and performance checks.
 
 The target project’s stack, brand and approved components take priority. The skill does not require a specific framework. The demo is an example, not an automatic guarantee of visual quality, security or performance.
+
+## Report learnings from other projects
+
+Use the [feedback workflow](CONTRIBUIR.md) and [short report template](skills/g3-design/examples/relato-uso.md).
+The host project records the finding and continues; skill maintenance handles
+triage, validation and releases separately. Raw reports stay local.
 
 ## Development and checks
 

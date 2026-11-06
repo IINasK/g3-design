@@ -32,7 +32,7 @@
 5. Gerar o ZIP apenas da skill com Git, usando a tag. Exemplo para esta release:
 
    ```sh
-   git archive --format=zip --prefix=g3-design/ --output=g3-design-v1.1.0.zip v1.1.0:skills/g3-design
+   git archive --format=zip --prefix=g3-design/ --output=g3-design-v1.2.0.zip v1.2.0:skills/g3-design
    ```
 
 6. Descompactar em pasta temporária e conferir conteúdo, versão e fiscal. Gerar

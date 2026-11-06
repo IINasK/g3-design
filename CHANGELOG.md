@@ -1,5 +1,36 @@
 # Notas de versão / Release notes
 
+## 1.2.0 — 2026-11-05
+
+### Português
+
+**Adicionado:** registro curto de aprendizados no projeto consumidor, sem editar
+ou investigar a skill central durante a tarefa. Modelo portátil incluído.
+Destino configurável pelas instruções locais ou `G3_DESIGN_RELATOS_DIR`, com
+registro no próprio projeto quando o destino não estiver acessível.
+
+**Manutenção:** fluxo de triagem, reprodução, decisão, validação e release no
+repositório central. Relatos brutos permanecem locais e fora do Git; somente
+melhorias generalizadas e provas com dados fictícios podem ser publicadas.
+
+**Atualização:** reinstale pela tag v1.2.0 no comando do seu agente. Instalações
+anteriores continuam funcionando, mas só recebem esta orientação ao atualizar.
+Definir um destino não envia nada automaticamente nem concede acesso a arquivos.
+Marca, caminhos do computador e dados dos projetos não entram no pacote portátil.
+Sem mudanças no desenho, cores, tempos ou física do piloto.
+
+### English
+
+**Added:** concise feedback reports from host projects without interrupting their
+tasks to edit the upstream skill; a portable report template and configurable
+local destination via project instructions or `G3_DESIGN_RELATOS_DIR`, with a
+host-project fallback when unavailable.
+
+**Maintenance:** central triage, reproduction, decisions, validation and releases.
+Raw reports remain local and Git-ignored; publish only generalized improvements
+and synthetic evidence. Update explicitly using the v1.2.0 tag. No automatic
+upload, access grant or visual/motion changes.
+
 ## 1.1.0 — 2026-11-05
 
 Primeira release formal. Reúne a evolução publicada anteriormente em `main` com
